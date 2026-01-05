@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.By;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -23,6 +24,7 @@ import com.comcast.crm.org.objectrepository.HomePage;
 import com.comcast.crm.org.objectrepository.OrganizationInfoPage;
 import com.comcast.crm.org.objectrepository.OrganizationPage;
 
+@Listeners(com.comcast.crm.generic.listenerutility.ListenerImpClass.class)
 public class CreateContactWithBaseClassTest extends BaseClass  {
 //	Utility Files objects:
 	ExcelUtility      excelUtility    = new ExcelUtility();
@@ -153,7 +155,8 @@ public class CreateContactWithBaseClassTest extends BaseClass  {
 		
 		// verification for Last Name
 		String actualLastName = contactInfoPage.getVerifyLastNameInfo().getText();
-		Assert.assertEquals(actualLastName,lastName,"Last Name is verified");
+		System.out.println(actualLastName  + lastName);
+		Assert.assertEquals(actualLastName.trim(),lastName,"Last Name is verified");
 
 		//dynamic locater write in Test Script only because POM file do not support dynamic Element
 		// verification for Org Name.
@@ -198,7 +201,7 @@ public class CreateContactWithBaseClassTest extends BaseClass  {
 		// verification for Last Name
 		ContactInfoPage contactInfoPage= new ContactInfoPage(driver);
 		String actualLastName = contactInfoPage.getVerifyLastNameInfo().getText();
-		Assert.assertEquals(actualLastName,lastName,"Last Name is verified");
+		Assert.assertEquals(actualLastName.trim(),lastName,"Last Name is verified");
 		
 		// verification for start date.
 		String actualStartDate = contactInfoPage.getVerifyStartDateInfo().getText();

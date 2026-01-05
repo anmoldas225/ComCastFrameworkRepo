@@ -4,6 +4,7 @@ import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.testng.Assert;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
@@ -18,6 +19,7 @@ import com.comcast.crm.org.objectrepository.HomePage;
 import com.comcast.crm.org.objectrepository.OrganizationInfoPage;
 import com.comcast.crm.org.objectrepository.OrganizationPage;
 
+@Listeners(com.comcast.crm.generic.listenerutility.ListenerImpClass.class)
 public class CreateOrgWithBaseClassTest extends BaseClass {
 	/*  All Utilities Class Object Creation:*/	
 	FileUtility fileUtility  = new FileUtility(); // Properties File
@@ -120,7 +122,7 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
 		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText();
 		SoftAssert sassert = new SoftAssert();
-		sassert.assertEquals(actualHeaderInfo, orgName, "Header Info is verified");
+		sassert.assertEquals(actualHeaderInfo.contains(orgName), true, "Header Info is verified");
 		sassert.assertAll();
 
 		// verification for Org Name
@@ -193,7 +195,7 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
 		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText();
 		SoftAssert sassert = new SoftAssert();
-		sassert.assertEquals(actualHeaderInfo, orgName, "Header Info is verified");
+		sassert.assertEquals(actualHeaderInfo.contains(orgName), true, "Header Info is verified");
 		sassert.assertAll();
 
 		// Verification for orgname

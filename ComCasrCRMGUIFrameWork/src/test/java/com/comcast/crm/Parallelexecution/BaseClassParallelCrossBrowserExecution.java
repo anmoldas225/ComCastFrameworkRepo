@@ -12,6 +12,7 @@ import org.testng.annotations.AfterSuite;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
+import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import com.aventstack.extentreports.ExtentReports;
@@ -49,7 +50,7 @@ public class BaseClassParallelCrossBrowserExecution {
     
 	@Parameters("Browser")
 	@BeforeClass(groups = {"Smoke Test","Regression Test"})
-	public void configBC(String browser) throws Throwable{
+	public void configBC(@Optional("chrome") String browser ) throws Throwable{
 		
 		System.out.println("Launch Browser");
 		String BROWSER= browser;
