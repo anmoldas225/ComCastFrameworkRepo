@@ -64,21 +64,4 @@ public class SampleReportTest {
 		
 		driver.close();
 	}
-	
-	@Test
-	public void createContactWithPhoneNumber() {
-		
-		ExtentTest test = report.createTest("createContactWithPhoneNumber");//Method Name
-		
-		test.log(Status.INFO,"Login to app");
-		test.log(Status.INFO,"Navigate To Contact Page");
-		test.log(Status.INFO,"Create Contact");
-
-		if("HDFC".equals("HDFC")) {
-			test.log(Status.PASS, "Pass");
-		}else {
-			test.log(Status.FAIL, "Fail");
-		}
-		System.out.println("Login To App");
-	}
 }

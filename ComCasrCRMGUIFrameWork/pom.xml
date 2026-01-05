@@ -33,7 +33,7 @@
 			<groupId>org.testng</groupId>
 			<artifactId>testng</artifactId>
 			<version>7.11.0</version>
-			
+
 		</dependency>
 
 		<!--https://mvnrepository.com/artifact/com.googlecode.json-simple/json-simple -->
@@ -56,7 +56,145 @@
 			<artifactId>extentreports</artifactId>
 			<version>5.1.2</version>
 		</dependency>
-
 	</dependencies>
+	<profiles>
+		<profile>
+			<id>Batch</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>CreateContactandOrgBatch.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>Group</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>CreateContactandOrgGroup.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>Group1</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>CreateContactandOrgGroup1.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>GRegional</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>CreateContactandOrgGroupRegional.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>ParallelCB</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>CreateContactandOrgParalleLCrossB.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>ParallelDis</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>CreateContactAndOrgParallelDis.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>Lis</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>CreateOrgWithBaseClassListenerScreenShot.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
+			<id>LisSam</id>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.apache.maven.plugins</groupId>
+						<artifactId>maven-surefire-plugin</artifactId>
+						<version>3.5.4</version>
+						<configuration>
+							<suiteXmlFiles>
+								<suiteXmlFile>InvoiceListenerSample.xml</suiteXmlFile>
+							</suiteXmlFiles>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+
 
 </project>

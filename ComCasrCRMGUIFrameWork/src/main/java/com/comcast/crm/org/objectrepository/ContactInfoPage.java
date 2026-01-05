@@ -25,6 +25,7 @@ public class ContactInfoPage {
 	public WebElement getVerifyLastNameInfo() {
 		return verifyLastNameInfo;
 	}
+	
 	//verification for Start Date.
 	@FindBy(id="dtlview_Support Start Date")
 	private WebElement verifyStartDateInfo;

@@ -3,7 +3,9 @@ package com.comcast.crm.baseTest;
 import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import com.aventstack.extentreports.Status;
 import com.comcast.crm.generic.baseutility.BaseClass;
@@ -53,6 +55,7 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 		CreateOrganizationPage createorganizationpage = new CreateOrganizationPage(driver);
 		createorganizationpage.sendOrgName(orgName);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Shipping Address is Filled");
 		// send the details to Shipping address
 		createorganizationpage.sendShippingAddress(shipAddress);
 
@@ -63,27 +66,18 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 		// verification for header
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
 		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText();
-		if (actualHeaderInfo.contains(orgName)) {
-			System.out.println(orgName + ": Headerinfo is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": Headerinfo is not Matched " + " Status = FAIL");
-		}
+		boolean status =actualHeaderInfo.contains(orgName);
+		Assert.assertEquals(status, true, "Header Info is Verified");
 
 		// verification for orgname
 		String actualOrgName = organizationInfoPage.getOrgNameVerify().getText();
-		if (actualOrgName.equals(orgName)) {
-			System.out.println(orgName + ": OrgName is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": OrgName is not Matched " + " Status = FAIL");
-		}
-
+		Assert.assertEquals(actualOrgName,orgName, "Organization is Verified");
+		
 		// verification for shipaddress
 		String actualShipAddress = organizationInfoPage.getShippingAddressVerify().getText();
-		if (actualShipAddress.equals(shipAddress)) {
-			System.out.println(shipAddress + ": Shipaddress is Matched " + " Status = PASS");
-		} else {
-			System.out.println(shipAddress + ": Shipaddress is not Matched " + " Status = FAIL");
-		}
+		SoftAssert sassert = new SoftAssert();
+		sassert.assertEquals(actualShipAddress, shipAddress, "Shipping Address is Verified");
+		sassert.assertAll();
 
 	}
 
@@ -95,59 +89,52 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 		String shipAddress= excelUtility.getDataFromExcelString("org", 1, 5);
 		String phoneNumber= excelUtility.getDataFromExcelString("org", 1, 6);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Home Page is Displayed");
 		HomePage homePage = new HomePage(driver);
 		// click on organization
 		homePage.getOrgTagLink().click();
-
+		
+		UtilityClassObject.getTest().log(Status.INFO, "Organization Page is Displayed");
 		// click on create organization + button
 		OrganizationPage organizationPage = new OrganizationPage(driver);
 		organizationPage.getCreateorganizationbtn().click();
 
+		UtilityClassObject.getTest().log(Status.INFO, "Create Organization Page is Displayed");
 		// send the details to organization name
 		CreateOrganizationPage createorganizationpage = new CreateOrganizationPage(driver);
 		createorganizationpage.sendOrgName(orgName);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Shipping Address is Filled");
 		// send the details to Shipping address
 		createorganizationpage.sendShippingAddress(shipAddress);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Phone Number is Filled");
 		// send the details to Shipping address
 		createorganizationpage.sendPhoneNumber(phoneNumber);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Save Button is Clicked");
 		// save the data by save button
 		createorganizationpage.getSaveBtn().click();
 
 		// verification for Header
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
 		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText();
-		if (actualHeaderInfo.contains(orgName)) {
-			System.out.println(orgName + ": Headerinfo is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": Headerinfo is not Matched " + " Status = FAIL");
-		}
+		SoftAssert sassert = new SoftAssert();
+		sassert.assertEquals(actualHeaderInfo, orgName, "Header Info is verified");
+		sassert.assertAll();
 
 		// verification for Org Name
 		String actualOrgName = organizationInfoPage.getOrgNameVerify().getText();
-		if (actualOrgName.equals(orgName)) {
-			System.out.println(orgName + ": OrgName is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": OrgName is not Matched " + " Status = FAIL");
-		}
-		
+		Assert.assertEquals(actualOrgName,orgName, "Organization Name is verified");
+
 		// verification for Phone Number
         String actualPhoneNumber = organizationInfoPage.getPhoneNameVerify().getText();
-        	if (actualPhoneNumber.equals(phoneNumber)) {
-        		System.out.println(phoneNumber + ": phoneNumber is Matched " + " Status = PASS");
-        	} else {
-        		System.out.println(phoneNumber + ": phoneNumber is not Matched " + " Status = FAIL");
-        	}
-        
+    		Assert.assertEquals(actualPhoneNumber,phoneNumber,"Phone Number is verified");
+
 		// verification for Ship Address
 		String actualShipAddress = organizationInfoPage.getShippingAddressVerify().getText();
-		if (actualShipAddress.equals(shipAddress)) {
-			System.out.println(shipAddress + ": Shipaddress is Matched " + " Status = PASS");
-		} else {
-			System.out.println(shipAddress + ": Shipaddress is not Matched " + " Status = FAIL");
-		}
+		Assert.assertEquals(actualShipAddress,shipAddress, "Shipping Address is verified");
+
 	}
 
 //  Create Organization With	Industry and Type DropDown:	
@@ -159,18 +146,22 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 		String typeDD     = excelUtility.getDataFromExcelString("org", 1, 4);
 		String shipAddress= excelUtility.getDataFromExcelString("org", 1, 5);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Home Page is Displayed");
 		HomePage homePage = new HomePage(driver);
 		// click on organization
 		homePage.getOrgTagLink().click();
 
+		UtilityClassObject.getTest().log(Status.INFO, "Organization Page is Displayed");
 		// click on create organization + button
 		OrganizationPage organizationPage = new OrganizationPage(driver);
 		organizationPage.getCreateorganizationbtn().click();
 
+		UtilityClassObject.getTest().log(Status.INFO, "Create Organization Page is Displayed");
 		// send the details to organization name
 		CreateOrganizationPage createorganizationpage = new CreateOrganizationPage(driver);
 		createorganizationpage.sendOrgName(orgName);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Industry DropDown is Filled");
 		// select drop down for industry
 		createorganizationpage.sendIndustryDD(industryDD);
 
@@ -180,6 +171,7 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
         System.out.println("<=================All Options Printed in Industry DropDown===================>");
         System.out.println("<=================Industry DropDown Verification Done===================>");
 		
+		UtilityClassObject.getTest().log(Status.INFO, "Type DropDown is Filled");
 		// select drop down for type
 		createorganizationpage.sendTypeDD(typeDD);
 		
@@ -189,35 +181,28 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
         System.out.println("<===================All Options Printed in Type DropDown======================>");
         System.out.println("<=================Type DropDown Verification Done===================>");
         
+		UtilityClassObject.getTest().log(Status.INFO, "Shipping Address is Filled");
 		// send the details to Shipping address
 		createorganizationpage.sendShippingAddress(shipAddress);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Save Button is Clicked");
 		// save the data by save button
 		createorganizationpage.getSaveBtn().click();
 		
 		// Verification for header
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
 		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText();
-		if (actualHeaderInfo.contains(orgName)) {
-			System.out.println(orgName + ": Headerinfo is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": Headerinfo is not Matched " + " Status = FAIL");
-		}
+		SoftAssert sassert = new SoftAssert();
+		sassert.assertEquals(actualHeaderInfo, orgName, "Header Info is verified");
+		sassert.assertAll();
 
 		// Verification for orgname
 		String actualOrgName = organizationInfoPage.getOrgNameVerify().getText();
-		if (actualOrgName.equals(orgName)) {
-			System.out.println(orgName + ": OrgName is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": OrgName is not Matched " + " Status = FAIL");
-		}
+		Assert.assertEquals(actualOrgName,orgName, "Organization Name is verified");
 	
 		// Verification for Shipaddress
 		String actualShipAddress = organizationInfoPage.getShippingAddressVerify().getText();
-		if (actualShipAddress.equals(shipAddress)) {
-			System.out.println(shipAddress + ": Shipaddress is Matched " + " Status = PASS");
-		} else {
-			System.out.println(shipAddress + ": Shipaddress is not Matched " + " Status = FAIL");
-		}
+		Assert.assertEquals(actualShipAddress,shipAddress, "Shipping Address is verified");
+
 	}
 }

@@ -16,7 +16,7 @@ public class HomePageVerificationTest {
 	public void homePageTest(Method mtd) {
 		
 		System.out.println(mtd.getName() + " Test Start");
-		String expectedPage = "Home Page";
+		String expectedPage = "Home";
 		
 		WebDriver driver = new ChromeDriver();
 		driver.manage().window().maximize();
@@ -64,7 +64,7 @@ public class HomePageVerificationTest {
 	   
        Assert.assertTrue(status); 
 	   System.out.println(mtd.getName() + " Test End");
-
+	   driver.quit();
 	}
 	
 

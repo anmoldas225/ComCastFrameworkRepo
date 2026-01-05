@@ -4,11 +4,15 @@ import java.io.IOException;
 
 import org.apache.poi.EncryptedDocumentException;
 import org.openqa.selenium.By;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
+import com.aventstack.extentreports.Status;
 import com.comcast.crm.generic.baseutility.BaseClass;
 import com.comcast.crm.generic.fileutility.ExcelUtility;
 import com.comcast.crm.generic.webdriverutiility.JavaUtility;
+import com.comcast.crm.generic.webdriverutiility.UtilityClassObject;
 import com.comcast.crm.generic.webdriverutiility.WebDriverUtility;
 import com.comcast.crm.org.objectrepository.ContactInfoPage;
 import com.comcast.crm.org.objectrepository.ContactOrganizationSearchPage;
@@ -37,29 +41,30 @@ public class CreateContactWithBaseClassTest extends BaseClass  {
 
 		String lastName = excelUtility.getDataFromExcelString("contact", 4, 3) + javaUtility.getRandomNumber();
 
+		UtilityClassObject.getTest().log(Status.INFO, "Home Page is Displayed");
 		// click on contact module header
 		HomePage homePage= new HomePage(driver);
 		homePage.getContactTagLink().click();
 
+		UtilityClassObject.getTest().log(Status.INFO, "Contact Page is Displayed");
 		// click on add or + contact module button
 		ContactPage contactPage= new ContactPage(driver);
 		contactPage.getCreateContactBtn().click();
 
+		UtilityClassObject.getTest().log(Status.INFO, "Create Contact Page is Displayed");
 		// Fill last Name TextField
 		CreateContactPage createContactPage= new CreateContactPage(driver);
 		createContactPage.getLastName().sendKeys(lastName);
 
+		UtilityClassObject.getTest().log(Status.INFO, "Save Button is Clicked");
 		// save the data by save button
 		createContactPage.getSaveBtn().click();
 
 		// verification for Last Name
 		ContactInfoPage contactInfoPage  = new ContactInfoPage(driver);
 		String actualLastName = contactInfoPage.getVerifyLastNameInfo().getText();
-		if (actualLastName.contains(lastName)) {
-			System.out.println(lastName + ": lastName is Matched " + " Status = PASS");
-		} else {
-			System.out.println(lastName + ": lastName is not Matched " + " Status = FAIL");
-		}
+		boolean status = actualLastName.contains(lastName);
+		Assert.assertEquals(status, true,"Last Name is verified");
 
 	}
 		
@@ -98,12 +103,10 @@ public class CreateContactWithBaseClassTest extends BaseClass  {
 		// verification for header
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
 		String actualheaderinfo = organizationInfoPage.getHeaderInfoVerify().getText();
-		if (actualheaderinfo.contains(orgName)) {
-			System.out.println(orgName + ": Headerinfo is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": Headerinfo is not Matched " + " Status = FAIL");
-		}
+		boolean status =actualheaderinfo.contains(orgName);
+		Assert.assertEquals(status, true, "Organization Name is verified");
 
+		
 		// navigate to contact module.
 
 		// click on contact module header
@@ -144,28 +147,18 @@ public class CreateContactWithBaseClassTest extends BaseClass  {
 		// verification for header with last Name
 		ContactInfoPage contactInfoPage= new ContactInfoPage(driver);
 		String actualHeaderInfo1 = contactInfoPage.getVerifyHeaderInfo().getText();
-		if (actualHeaderInfo1.contains(lastName)) {
-			System.out.println(lastName + ": Headerinfo is Matched " + " Status = PASS");
-		} else {
-			System.out.println(lastName + ": Headerinfo is not Matched " + " Status = FAIL");
-		}
-
+		SoftAssert sassert = new SoftAssert();
+		sassert.assertNotEquals(actualHeaderInfo1, lastName, "Header Info1 is verified");
+		sassert.assertAll();
+		
 		// verification for Last Name
 		String actualLastName = contactInfoPage.getVerifyLastNameInfo().getText();
-		if (actualLastName.contains(lastName)) {
-			System.out.println(lastName + ": lastName is Matched " + " Status = PASS");
-		} else {
-			System.out.println(lastName + ": lastName is not Matched " + " Status = FAIL");
-		}
+		Assert.assertEquals(actualLastName,lastName,"Last Name is verified");
 
 		//dynamic locater write in Test Script only because POM file do not support dynamic Element
 		// verification for Org Name.
-		String actualorgname = driver.findElement(By.linkText(orgName)).getText();
-	    if (actualorgname.equals(orgName)) {
-			System.out.println(orgName + ": OrgName is Matched " + " Status = PASS");
-		} else {
-			System.out.println(orgName + ": OrgName is not Matched " + " Status = FAIL");
-		}
+		String actualOrgName = driver.findElement(By.linkText(orgName)).getText();
+		Assert.assertEquals(actualOrgName,orgName,"Organization Name is verified");
 
 	}
 
@@ -205,25 +198,14 @@ public class CreateContactWithBaseClassTest extends BaseClass  {
 		// verification for Last Name
 		ContactInfoPage contactInfoPage= new ContactInfoPage(driver);
 		String actualLastName = contactInfoPage.getVerifyLastNameInfo().getText();
-		if (actualLastName.contains(lastName)) {
-			System.out.println(lastName + ": lastName is Matched " + " Status = PASS");
-		} else {
-			System.out.println(lastName + ": lastName is not Matched " + " Status = FAIL");
-		}
+		Assert.assertEquals(actualLastName,lastName,"Last Name is verified");
+		
 		// verification for start date.
 		String actualStartDate = contactInfoPage.getVerifyStartDateInfo().getText();
-		if (actualStartDate.equals(actDate)) {
-			System.out.println(actDate + ": actual date is Matched " + " Status = PASS");
-		} else {
-			System.out.println(actDate + ": actual date is not Matched " + " Status = FAIL");
-		}
+		Assert.assertEquals(actualStartDate,actDate,"Actual Date is verified");
 
 		// verification for end date.
 		String actualEndDate = contactInfoPage.getVerifyEndDateInfo().getText();
-		if (actualEndDate.equals(dateRequired)) {
-			System.out.println(dateRequired + ": daterequired is Matched " + " Status = PASS");
-		} else {
-			System.out.println(dateRequired + ": daterequired is not Matched " + " Status = FAIL");
-		}
+		Assert.assertEquals(actualEndDate,dateRequired,"End Date is verified");
 	}
 }

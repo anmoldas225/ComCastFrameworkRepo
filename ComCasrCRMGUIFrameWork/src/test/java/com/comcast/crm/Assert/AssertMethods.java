@@ -6,7 +6,9 @@ import org.testng.Assert;
 import org.testng.Reporter;
 import org.testng.annotations.Test;
 
-public class AssertMethods {
+import com.comcast.crm.generic.baseutility.BaseClass;
+
+public class AssertMethods extends BaseClass{
 	
 	@Test
 	public void assertMethod(Method mtd){
@@ -20,7 +22,7 @@ public class AssertMethods {
 		System.out.println("Step-3");
 
 		System.out.println(mtd.getName() + "Verification Done");
-
+        
 	}
 	
 	@Test
