@@ -120,9 +120,9 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 
 		// verification for Header
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
-		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText();
+		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText().trim();
 		SoftAssert sassert = new SoftAssert();
-		sassert.assertEquals(actualHeaderInfo.contains(orgName), true, "Header Info is verified");
+		sassert.assertEquals(actualHeaderInfo, true, "Header Info is verified");
 		sassert.assertAll();
 
 		// verification for Org Name
@@ -193,9 +193,9 @@ public class CreateOrgWithBaseClassTest extends BaseClass {
 		
 		// Verification for header
 		OrganizationInfoPage organizationInfoPage = new OrganizationInfoPage(driver);
-		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText();
+		String actualHeaderInfo = organizationInfoPage.getHeaderInfoVerify().getText().trim();
 		SoftAssert sassert = new SoftAssert();
-		sassert.assertEquals(actualHeaderInfo.contains(orgName), true, "Header Info is verified");
+		sassert.assertEquals(actualHeaderInfo, true, "Header Info is verified");
 		sassert.assertAll();
 
 		// Verification for orgname
