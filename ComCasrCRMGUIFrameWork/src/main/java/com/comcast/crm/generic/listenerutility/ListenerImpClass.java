@@ -55,7 +55,7 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 	@Override
 	public void onTestStart(ITestResult result) {
 		// TODO Auto-generated method stub
-		System.out.println("===========" + result.getMethod().getMethodName() + "==========");
+		System.out.println("<===========" + result.getMethod().getMethodName() + "==========>");
 	    
 		test = report.createTest(result.getMethod().getMethodName());//Method Name
 		UtilityClassObject.setTest(test);
@@ -66,7 +66,7 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 	@Override
 	public void onTestSuccess(ITestResult result) {
 		// TODO Auto-generated method stub
-		System.out.println("===========" + result.getMethod().getMethodName() + "=========");
+		System.out.println("<===========" + result.getMethod().getMethodName() + "=========>");
 		test.log(Status.INFO,result.getMethod().getMethodName() + "<=====COMPLETED======>" );
 
 	}
@@ -75,7 +75,7 @@ public class ListenerImpClass implements ITestListener, ISuiteListener {
 	public void onTestFailure(ITestResult result) {
 		// TODO Auto-generated method stub
 		 String testName = result.getMethod().getMethodName();
-		 TakesScreenshot tks = (TakesScreenshot)BaseClass.sdriver;
+		 TakesScreenshot tks = (TakesScreenshot)UtilityClassObject.getDriver();
 		 String src = tks.getScreenshotAs(OutputType.BASE64);
 		 String currentTime = new Date().toString().replace(" ", "_").replace(":", "_");
 //		 File des = new File("./ScreenShot/"+testName+currentTime +".png");
