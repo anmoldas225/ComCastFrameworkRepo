@@ -36,7 +36,7 @@ public class HomePage {
 		return icon;
 	}
 	
-	@FindBy(linkText="Sign Out")
+	@FindBy(xpath="//a[@href='index.php?module=Users&action=Logout']")
 	 private WebElement signOutLink;
 
 	public WebElement getSignoutLink() {
