@@ -82,7 +82,7 @@ public class BaseClass {
 		
 		System.out.print("Close the Browser");
 		WebDriverUtility webDriverUtility = new WebDriverUtility(driver);
-		webDriverUtility.close();
+		webDriverUtility.quit();
 	} 
 	
 	@AfterSuite
